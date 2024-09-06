@@ -1,4 +1,5 @@
 <script setup>
+import GhostVue from './components/Ghost.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import LoginForm from './components/LoginForm.vue'
 
@@ -6,8 +7,7 @@ import LoginForm from './components/LoginForm.vue'
 
 <template>
   <div id="app">
-    <login-form />
-    <!-- ou <LoginForm /> -->
+    <ghost/>
   </div>
 </template>
 
