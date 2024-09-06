@@ -1,5 +1,5 @@
 <script setup>
-import GhostVue from './components/Ghost.vue'
+import Ghost from './components/Ghost.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import LoginForm from './components/LoginForm.vue'
 

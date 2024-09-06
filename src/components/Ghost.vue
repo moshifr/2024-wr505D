@@ -1,22 +1,22 @@
 <template>
 <ol>
   <li :style="ghost1.style">
-    <span :class="{joyful: ghost1.anim}" class="ghost">👻︎</span>
+    <span :class="ghost1.anim" class="ghost">👻︎</span>
     I'm joyful and red
   </li>
   <li :style="ghost2.style">
     <span class="ghost" :class="ghost2.anim">👻︎</span>
     I'm jelly and green
   </li>
-  <li :style="{color: ghost3.isBlue ?  'blue'  : ''}">
-    <span class="ghost" :class="{wobbly: ghost3.isWobbly }">👻︎</span>
+  <li :style="{color: ghost3.isBlue ? 'blue' : ''}">
+    <span class="ghost" :class="{wobbly: ghost3.isWobbly}">👻︎</span>
     I'm wobbly and blue
   </li>
 </ol>
 </template>
 
 <script>
-import "./ghosts.css";
+import "../assets/ghosts.css";
 
 export default {
   data(){
