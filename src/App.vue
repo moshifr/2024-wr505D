@@ -1,13 +1,10 @@
 <script setup>
-import Ghost from './components/Ghost.vue'
-import HelloWorld from './components/HelloWorld.vue'
-import LoginForm from './components/LoginForm.vue'
-
+import IceCreamGenerator from "./components/IceCreamGenerator.vue";
 </script>
 
 <template>
   <div id="app">
-    <ghost/>
+    <ice-cream-generator />
   </div>
 </template>
 
