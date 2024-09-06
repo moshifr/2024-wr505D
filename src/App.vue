@@ -1,10 +1,10 @@
 <script setup>
-import IceCreamGenerator from "./components/IceCreamGenerator.vue";
+import Temperature from "./components/Temperature.vue";
 </script>
 
 <template>
   <div id="app">
-    <ice-cream-generator />
+    <temperature />
   </div>
 </template>
 
