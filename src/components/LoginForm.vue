@@ -1,37 +1,40 @@
 <template>
     <div id="login-form">
         
-    <form>
-    <h1>{{ title }}</h1>
-    <p>Remplissez ce formulaire pour vous connecter.</p>
-    <hr>
+    <form @submit.prevent="onSubmit">
+      <h1>{{ title }}</h1>
+      <p>Remplissez ce formulaire pour vous connecter.</p>
+      <hr>
 
-Mon panier : {{ total * quantity }} € 
+      <label for="email"><b>Email</b></label>
+      <input type="text"  v-model="email" placeholder="Entrez votre courriel" id="email" name="email" required>
 
-    <input type="text" v-model="title" >
+      <label for="psw"><b>Mot de passe</b></label>
+      <input type="password"  v-model="password" placeholder="Entrez votre mot de passe" id="psw" name="psw" required>
 
-    <input type="number" v-model="total" >
-    <input type="number" v-model="quantity" >
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Entrez votre courriel" id="email" name="email" required>
-
-    <label for="psw"><b>Mot de passe</b></label>
-    <input type="password" placeholder="Entrez votre mot de passe" id="psw" name="psw" required>
-
-    <p><button type="submit">Se connecter</button></p>
+      <p><button  type="submit">Se connecter</button></p>
     </form>
+    
+    <!-- Tips pour débuger : -->
+    <div>{{ JSON.stringify(loggedIn) }}</div>
+    <!-- Tips pour débuger : -->
     </div>
+    
 </template>
 
 <script>
   export default {
     data() {
       return {
-        imgPath: '/toto.png', 
-        title: 'Mon titre',
-        total: 0.00,
-        quantity: 0.00,
+        title: 'Authentification',
+        email: 'email@email.com',
+        password: 'password',
+        loggedIn: false
+      }
+    },
+    methods: {
+      onSubmit() {
+        this.loggedIn = true;
       }
     }
   }

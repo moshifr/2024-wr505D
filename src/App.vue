@@ -1,9 +1,10 @@
 <script setup>
-import Monkeys from "./components/Monkeys.vue";
+import LoginForm from "./components/LoginForm.vue";
 </script>
 
 <template>
   <div id="app">
+    <login-form />
   </div>
 </template>
 
