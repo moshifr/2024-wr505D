@@ -1,10 +1,9 @@
 <script setup>
-import InMyBasket from "./components/InMyBasket.vue";
+import Monkeys from "./components/Monkeys.vue";
 </script>
 
 <template>
   <div id="app">
-    <in-my-basket></in-my-basket>
   </div>
 </template>
 
