@@ -1,10 +1,10 @@
 <script setup>
-import Temperature from "./components/Temperature.vue";
+import InMyBasket from "./components/InMyBasket.vue";
 </script>
 
 <template>
   <div id="app">
-    <temperature />
+    <in-my-basket></in-my-basket>
   </div>
 </template>
 
