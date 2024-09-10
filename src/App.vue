@@ -19,8 +19,9 @@ export default {
 
 <template>
   <div id="app">
-    <login-form />
-    <search-film />
+    <login-form v-if="loggedIn === false" />
+
+    <search-film v-else/>
   </div>
 </template>
 
