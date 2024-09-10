@@ -1,12 +1,8 @@
 <template>
 <div>
-    <div id="login-form" v-if=" loggedIn === true ">
+    <div id="login-form">
         
-    <form @submit.prevent="onSubmit">
-
-    <!-- Tips pour débuger : -->
-    <div>{{ JSON.stringify(loggedIn) }}</div>
-    <!-- Tips pour débuger : -->
+    <form>
 
       <h1>{{ title }}</h1>
       <p>Remplissez ce formulaire pour vous connecter.</p>
@@ -22,27 +18,7 @@
     </form>
     
     </div>
-    <div id="films" v-else>
-      
-      <ul class="films">
-        <li class="film card" v-for="film in films">
-          <img class="poster" :src="film.poster" />
-          <p class="title">
-            {{ film.title }}
-            <span class="rating"> <span v-for="index in Math.round(film.metascore / 20)">★</span></span>
-          </p>
-          <dl>
-            <dt>Release date</dt><dd>{{ film.released}}</dd>
-            <dt>Director</dt><dd>{{ film.director }}</dd>
-            <dt>Actors</dt><dd>{{ film.actors }}</dd>
-          </dl>
-          <p class="plot">
-          {{ film.plot }}
-          </p>
-        </li>
-      </ul>
-
-</div> 
+  
 </div>
     
 </template>
@@ -54,7 +30,6 @@
         title: 'Authentification',
         email: 'email@email.com',
         password: 'password',
-        loggedIn: false,
         films: [
           {
             title: 'Titanic',
@@ -86,9 +61,9 @@
         ]
       }
     },
-    methods: {
-      onSubmit() {
-        this.loggedIn = true;
+    computed: {
+      countFilms() {
+        return this.films.length
       }
     }
   }

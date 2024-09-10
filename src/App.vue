@@ -1,10 +1,26 @@
-<script setup>
+<script >
 import LoginForm from "./components/LoginForm.vue";
+import SearchFilm from "./components/SearchFilm.vue";
+
+export default {
+  data() {
+    return { 
+      loggedIn: false
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.loggedIn = true;
+    }
+  },
+  components: {LoginForm, SearchFilm}
+}
 </script>
 
 <template>
   <div id="app">
     <login-form />
+    <search-film />
   </div>
 </template>
 
