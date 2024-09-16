@@ -10,6 +10,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log("onsu")
       this.loggedIn = true;
     }
   },
@@ -19,7 +20,7 @@ export default {
 
 <template>
   <div id="app">
-    <login-form v-if="loggedIn === false" />
+    <login-form @form-submit="onSubmit" v-if="loggedIn == false" />
 
     <search-film v-else/>
   </div>

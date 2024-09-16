@@ -2,7 +2,7 @@
 <div>
     <div id="login-form">
         
-    <form>
+    <form @submit.prevent="formSubmit">
 
       <h1>{{ title }}</h1>
       <p>Remplissez ce formulaire pour vous connecter.</p>
@@ -25,6 +25,12 @@
 
 <script>
   export default {
+    emits: ["form-submit"],
+    methods: {
+      formSubmit() {
+       this.$emit("form-submit", true);
+      }
+    },
     data() {
       return {
         title: 'Authentification',
