@@ -2,7 +2,8 @@
 <div>
     <div id="login-form">
         
-    <form @submit.prevent="formSubmit">
+        <h1>{{ titrePage }}</h1>
+    <form @submit.prevent="login({user: ''})">
 
       <h1>{{ title }}</h1>
       <p>Remplissez ce formulaire pour vous connecter.</p>
@@ -24,13 +25,14 @@
 </template>
 
 <script>
+import { useSession } from "@/stores/session"
+import { mapActions } from "pinia";
+
   export default {
-    emits: ["form-submit"],
     methods: {
-      formSubmit() {
-       this.$emit("form-submit", true);
-      }
+      ...mapActions(useSession, ["login"])
     },
+    props: ["titrePage"],
     data() {
       return {
         title: 'Authentification',

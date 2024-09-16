@@ -2,7 +2,7 @@
   <div id="search-film">
     <form @submit.prevent="searchFilm">
       <label for="search">Rechercher :</label>
-      <input id="search" type="text" ref="searchInput" v-model="query">
+      <input id="search" ref="searchInput" type="text" v-model="query">
     </form>
     <div id="films">
         <h2>Nombre de films : {{ numberResults }} </h2>
@@ -14,9 +14,15 @@
 </template>
 <script>
 import Film from './Film.vue';
-
 export default {
-  components: {Film} ,
+    components: {Film},
+    mounted() {
+      // via une référence
+      this.$refs.searchInput.focus();
+
+      // en utilisant $el ==> récupère le DOM de notre component
+      //this.$el.querySelector('#search').focus();
+    },
     data() {
         return {
             query: '',
@@ -63,12 +69,6 @@ export default {
         query () {
             this.films = []
         }
-    },
-    mounted() {
-      // ici on utilise les refs
-      this.$refs.searchInput.focus()
-      // ici on récupère le DOM de notre component
-      this.$el.querySelector('#search').focus();
     }
 }
 </script>

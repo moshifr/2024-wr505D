@@ -1,17 +1,21 @@
 <script >
 import LoginForm from "./components/LoginForm.vue";
 import SearchFilm from "./components/SearchFilm.vue";
+import { useSession } from "@/stores/session"
+import { mapState, mapActions } from "pinia";
+
 
 export default {
   data() {
     return { 
-      loggedIn: false
+      titrePage: "Titidogidoig",
     }
   },
+  computed: {
+      ...mapState(useSession, ["loggedIn"])
+  },
   methods: {
-    onSubmit() {
-      this.loggedIn = true;
-    }
+    ...mapActions(useSession, ["login"])
   },
   components: {LoginForm, SearchFilm}
 }
@@ -19,9 +23,9 @@ export default {
 
 <template>
   <div id="app">
-    <login-form @form-submit="onSubmit" v-if="loggedIn == false" />
+    <login-form :titrePage="titrePage" v-if="loggedIn == false" />
 
-    <search-film v-else/>
+    <search-film :titrePage="titrePage" v-else/>
   </div>
 </template>
 
