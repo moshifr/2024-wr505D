@@ -10,7 +10,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("onsu")
       this.loggedIn = true;
     }
   },

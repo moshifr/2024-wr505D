@@ -2,12 +2,12 @@
   <div id="search-film">
     <form @submit.prevent="searchFilm">
       <label for="search">Rechercher :</label>
-      <input id="search" type="text" v-model="query">
+      <input id="search" type="text" ref="searchInput" v-model="query">
     </form>
     <div id="films">
         <h2>Nombre de films : {{ numberResults }} </h2>
         <ul class="films">
-            <film :film="currentFilm" v-for="currentFilm in films" :key="film.title" />
+            <film :film="currentFilm" v-for="currentFilm in films" :key="currentFilm.title" />
         </ul>
     </div> 
   </div>
@@ -63,6 +63,12 @@ export default {
         query () {
             this.films = []
         }
+    },
+    mounted() {
+      // ici on utilise les refs
+      this.$refs.searchInput.focus()
+      // ici on récupère le DOM de notre component
+      this.$el.querySelector('#search').focus();
     }
 }
 </script>
