@@ -5,13 +5,15 @@ export const useSession = defineStore('session', {
   state: () => {
     return {
       user: null,
-      loggedIn: false
+      loggedIn: false,
+      token: ''
     }
   },
   actions: {
-    login({ user }) {
+    login({ user, token }) {
       this.loggedIn = true
       this.user = user
+      this.token = token
     }
   }
 })

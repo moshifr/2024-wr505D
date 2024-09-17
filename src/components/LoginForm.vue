@@ -2,8 +2,8 @@
 <div>
     <div id="login-form">
         
-        <h1>{{ titrePage }}</h1>
-    <form @submit.prevent="login({user: ''})">
+        <p class="error" v-if="error">{{ error }}</p>
+    <form @submit.prevent="onSubmitLogin">
 
       <h1>{{ title }}</h1>
       <p>Remplissez ce formulaire pour vous connecter.</p>
@@ -24,17 +24,48 @@
     
 </template>
 
+<style scoped>
+.error {
+  color: red;
+}
+</style>
 <script>
 import { useSession } from "@/stores/session"
 import { mapActions } from "pinia";
 
   export default {
     methods: {
+      /*
+      verifyPassword(password) {
+        // si il y a un nombre
+        if (!new RegExp(/\d+/).match(password)) return;
+          // si il y a un "mot" 
+        if (!password.indexOf("mot")) return;
+
+        if (!password.toLowerCase() == password) return;
+        
+        
+        alert('Bon mot de passe')
+      
+      },*/
+      onSubmitLogin() {
+        if (
+            this.email !== 'email@email.com' || 
+            this.password !== 'test1234'
+          ) {
+          this.error = "Mauvais login / mot de passe"
+       
+          return null;
+        }
+
+        this.login({user: this.email, password: this.password})
+      },
       ...mapActions(useSession, ["login"])
     },
     props: ["titrePage"],
     data() {
       return {
+        error: null,
         title: 'Authentification',
         email: 'email@email.com',
         password: 'password',
