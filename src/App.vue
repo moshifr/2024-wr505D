@@ -15,7 +15,7 @@ export default {
       ...mapState(useSession, ["loggedIn"])
   },
   methods: {
-    ...mapActions(useSession, ["login"])
+    ...mapActions(useSession, ["logout"])
   },
   components: {LoginForm, SearchFilm}
 }
@@ -23,6 +23,9 @@ export default {
 
 <template>
   <div id="app">
+    <div v-if="loggedIn">
+        <button @click="logout">Se déconnecter</button>
+    </div>
     <login-form :titrePage="titrePage" v-if="loggedIn == false" />
 
     <search-film :titrePage="titrePage" v-else/>
