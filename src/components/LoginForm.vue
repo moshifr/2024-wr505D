@@ -2,7 +2,6 @@
 <div>
     <div id="login-form">
         
-        <p class="error" v-if="error">{{ error }}</p>
     <form @submit.prevent="onSubmitLogin">
 
       <h1>{{ title }}</h1>
@@ -16,6 +15,7 @@
       <input type="password"  v-model="password" placeholder="Entrez votre mot de passe" id="psw" name="psw" required>
 
       <p><button  type="submit">Se connecter</button></p>
+      <p class="error" v-if="error">{{ error }}</p>
     </form>
     
     </div>
@@ -25,10 +25,12 @@
 </template>
 
 <style scoped>
-.error {
-  color: red;
-}
+  .error {
+    color: red;
+    
+  }
 </style>
+
 <script>
 import { useSession } from "@/stores/session"
 import { mapActions } from "pinia";
@@ -48,17 +50,18 @@ import { mapActions } from "pinia";
         alert('Bon mot de passe')
       
       },*/
+      isEmailValid() {
+        return  true;
+          
+            //this.password === 'test1234';
+      },
       onSubmitLogin() {
-        if (
-            this.email !== 'email@email.com' || 
-            this.password !== 'test1234'
-          ) {
-          this.error = "Mauvais login / mot de passe"
-       
-          return null;
+        if (!this.isEmailValid()) {
+            this.error = 'Mauvais couple login / mot de passe';
+            return; 
         }
-
         this.login({user: this.email, password: this.password})
+        
       },
       ...mapActions(useSession, ["login"])
     },

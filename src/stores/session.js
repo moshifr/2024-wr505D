@@ -16,9 +16,9 @@ export const useSession = defineStore('session', {
       this.token = token
     },
     logout() {
-        this.loggedIn = false;
-        this.user = null;
-        this.token = null;
+      this.loggedIn = false;
+      this.user = null;
+      this.token = '';
     }
   }
 })

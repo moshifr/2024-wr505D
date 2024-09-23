@@ -4,7 +4,6 @@ import SearchFilm from "./components/SearchFilm.vue";
 import { useSession } from "@/stores/session"
 import { mapState, mapActions } from "pinia";
 
-
 export default {
   data() {
     return { 
@@ -12,7 +11,7 @@ export default {
     }
   },
   computed: {
-      ...mapState(useSession, ["loggedIn"])
+      ...mapState(useSession, ["loggedIn", "user"])
   },
   methods: {
     ...mapActions(useSession, ["logout"])
@@ -23,12 +22,17 @@ export default {
 
 <template>
   <div id="app">
-    <div v-if="loggedIn">
-        <button @click="logout">Se déconnecter</button>
+    <div v-if="loggedIn === true">
+      <!-- si on est connecté --> 
+      <span>{{ user }}</span>
+      <button @click="logout">Se déconnecter</button>
     </div>
+
     <login-form :titrePage="titrePage" v-if="loggedIn == false" />
 
     <search-film :titrePage="titrePage" v-else/>
+
+    <p class="error">Mon erreur app.vue</p>  
   </div>
 </template>
 
