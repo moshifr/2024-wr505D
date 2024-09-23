@@ -1,13 +1,19 @@
 <script >
 import LoginForm from "./components/LoginForm.vue";
 import SearchFilm from "./components/SearchFilm.vue";
+import HeaderBloc from './components/Header.vue';
 import { useSession } from "@/stores/session"
 import { mapState, mapActions } from "pinia";
+
 
 export default {
   data() {
     return { 
       titrePage: "Titidogidoig",
+      toto: "titi",
+      propDefault: {
+        toto: "titi"
+      }
     }
   },
   computed: {
@@ -16,23 +22,21 @@ export default {
   methods: {
     ...mapActions(useSession, ["logout"])
   },
-  components: {LoginForm, SearchFilm}
+  components: {LoginForm, SearchFilm, HeaderBloc}
 }
 </script>
 
 <template>
   <div id="app">
-    <div v-if="loggedIn === true">
-      <!-- si on est connecté --> 
-      <span>{{ user }}</span>
-      <button @click="logout">Se déconnecter</button>
-    </div>
 
-    <login-form :titrePage="titrePage" v-if="loggedIn == false" />
+    <header-bloc></header-bloc>
 
-    <search-film :titrePage="titrePage" v-else/>
+    
+    <router-view />
 
-    <p class="error">Mon erreur app.vue</p>  
+  <hr><hr>
+  
+
   </div>
 </template>
 

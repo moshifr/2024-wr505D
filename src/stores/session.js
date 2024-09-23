@@ -19,6 +19,7 @@ export const useSession = defineStore('session', {
       this.loggedIn = false;
       this.user = null;
       this.token = '';
+      
     }
   }
 })

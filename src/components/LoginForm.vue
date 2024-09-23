@@ -60,8 +60,9 @@ import { mapActions } from "pinia";
             this.error = 'Mauvais couple login / mot de passe';
             return; 
         }
-        this.login({user: this.email, password: this.password})
         
+        this.login({user: this.email, password: this.password})
+        this.$router.push("search")
       },
       ...mapActions(useSession, ["login"])
     },
