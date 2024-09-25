@@ -2,6 +2,7 @@
 <div>
     <div id="login-form">
         
+        <h1>Login</h1>
     <form @submit.prevent="onSubmitLogin">
 
       <h1>{{ title }}</h1>
@@ -34,35 +35,20 @@
 <script>
 import { useSession } from "@/stores/session"
 import { mapActions } from "pinia";
+import UserService from '@/services/UserService.js'
 
   export default {
     methods: {
-      /*
-      verifyPassword(password) {
-        // si il y a un nombre
-        if (!new RegExp(/\d+/).match(password)) return;
-          // si il y a un "mot" 
-        if (!password.indexOf("mot")) return;
-
-        if (!password.toLowerCase() == password) return;
-        
-        
-        alert('Bon mot de passe')
-      
-      },*/
-      isEmailValid() {
-        return  true;
-          
-            //this.password === 'test1234';
-      },
-      onSubmitLogin() {
-        if (!this.isEmailValid()) {
-            this.error = 'Mauvais couple login / mot de passe';
-            return; 
+       async onSubmitLogin () {
+        this.error = null;
+        try {
+          const response = await UserService.login({ email: this.email, password: this.password })
+          const session = useSession();
+          session.login({ user: response.user, token: response.token });
+          this.$router.push('/search')
+        } catch (error) {
+          this.error = error.toString()
         }
-        
-        this.login({user: this.email, password: this.password})
-        this.$router.push("search")
       },
       ...mapActions(useSession, ["login"])
     },

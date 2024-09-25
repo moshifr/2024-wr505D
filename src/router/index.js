@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import HelloWorld from '../components/HelloWorld.vue'
 import Login from '../views/LoginView.vue'
+import Register from '../views/RegisterView.vue'
 import Search from '../views/SearchView.vue'
 import { useSession } from '../stores/session';
 
@@ -38,6 +39,11 @@ const router = new VueRouter({
       path: "/search",
       name:"search",
       component: Search
+    },
+    {
+      path: "/register",
+      name:"register",
+      component: Register
     }
   ]
 })

@@ -7,6 +7,9 @@
             </li>
 
             <li>
+                <router-link to="register">Create user</router-link>
+            </li>
+            <li>
                 <router-link to="search">Search</router-link>
             </li>
         </ul>
