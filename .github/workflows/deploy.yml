@@ -51,7 +51,7 @@ jobs:
 
       # Étape 4: Lancer Cypress en mode headless
       - name: Run Cypress tests
-        run: npx cypress run
+        run: npm run test:e2e:ci
 
   # Job 3: Déploiement
   deploy:

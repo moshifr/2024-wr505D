@@ -1,12 +1,16 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  baseUrl: 'http://localhost:5050',
+  "video": false,
   e2e: {
-    specPattern: 'cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}',
-    baseUrl: 'http://localhost:4173'
+    "componentFolder": "src",
+    specPattern: '**/__tests__/*.{cy,spec}.{js,jsx,ts,tsx}',
+    baseUrl: 'http://localhost:5050'
   },
   component: {
-    specPattern: 'src/**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}',
+    "componentFolder": "src",
+    specPattern: '**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}',
     devServer: {
       framework: 'vue',
       bundler: 'vite'

@@ -1,10 +1,8 @@
 <template>
-    <li class="film card">
+    <li class="film card" v-if="film">
         <img class="poster" :src="film.poster" />
-        <p class="title">
-            {{ film.title }}
-            <span class="rating"> <span v-for="index in Math.round(film.metascore / 20)">★</span></span>
-        </p>
+        <p class="title">{{ film.title }}</p>
+        <span class="rating"><span v-for="index in Math.round(film.metascore / 20)">★</span></span>
         <dl>
             <dt>Release date</dt><dd>{{ film.released}}</dd>
             <dt>Director</dt><dd>{{ film.director }}</dd>
@@ -17,11 +15,6 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-
-        }
-    },
     props: ["film"]
 }
 </script>
