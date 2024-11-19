@@ -1,34 +1,88 @@
-name: CI/CD Pipeline
+name: Deploy Workflow
 
 on:
   push:
     branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
+      - main  # Le workflow se déclenche uniquement sur la branche "main".
 
 jobs:
-  test:
+  # Job 1: Exécuter les tests unitaires
+  unit-tests:
     runs-on: ubuntu-latest
+
     steps:
+      # Étape 1: Récupérer le code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run Tests
-        run: npm test
+      # Étape 2: Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
-  deploy-staging:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop'
-    steps:
-      - name: Build and Deploy to Staging
-        run: echo "Deploying to staging..."
+      # Étape 3: Installer les dépendances
+      - name: Install dependencies
+        run: npm install
 
-  deploy-production:
+      # Étape 4: Lancer les tests unitaires
+      - name: Run unit tests
+        run: npm run test
+
+  # Job 2: Tests Cypress (E2E)
+  e2e-tests:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    needs: unit-tests  # Ce job dépend du succès des tests unitaires.
+
     steps:
-      - name: Build and Deploy to Production
-        run: echo "Deploying to production..."  
+      # Étape 1: Récupérer le code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Étape 2: Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Étape 3: Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4: Lancer Cypress en mode headless
+      - name: Run Cypress tests
+        run: npx cypress run
+
+  # Job 3: Déploiement
+  deploy:
+    runs-on: ubuntu-latest
+    needs: e2e-tests  # Ce job dépend du succès des tests Cypress.
+
+    steps:
+      # Étape 1: Récupérer le code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Étape 2: Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Étape 3: Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4: Construire le projet (build)
+      - name: Build the project
+        run: npm run build
+
+      # Étape 5: Déployer via SCP
+      - name: Deploy to Server
+        uses: appleboy/scp-action@v0.2.1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/"
+          target: "/var/www/vhosts/web-moshi.fr/httpdocs/testdeploy"
