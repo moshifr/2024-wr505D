@@ -45,22 +45,15 @@ jobs:
         with:
           node-version: 16
       
-      # Étape 3: Installer les dépendances
-      - name: Install dependencies
-        run: npm install
-
-      # Étape 3: Installer les dépendances
-      - name: Install dependencies
-        run: npm install
-
-      # Étape 4: Lancer la preview
-      - name: Install dependencies
-        run: npm run preview
 
 
       # Étape 5: Lancer Cypress en mode headless
       - name: Cypress run
         uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          build: npm run build
+          start: npm run start
 
   # Job 3: Déploiement
   deploy:
