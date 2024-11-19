@@ -59,7 +59,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: e2e-tests  # Ce job dépend du succès des tests Cypress.
-
+    environment: production
     steps:
       # Étape 1: Récupérer le code
       - name: Checkout repository
