@@ -50,8 +50,8 @@ jobs:
         run: npm install
 
       # Étape 4: Lancer Cypress en mode headless
-      - name: Run Cypress tests
-        run: npm run test:e2e:ci
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
 
   # Job 3: Déploiement
   deploy:
